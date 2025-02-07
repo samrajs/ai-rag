@@ -1,2 +1,2 @@
 .env
-huggingface_index_react/**
+faiss_index_react/**

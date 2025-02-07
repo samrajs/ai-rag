@@ -18,9 +18,9 @@ if __name__ == "__main__":
     embeddings = OllamaEmbeddings(model="znbang/bge:small-en-v1.5-q8_0")
     llm = ChatOllama(model="llama3.2", temperature=0)
 
-    query = "what is Pinecone in machine learning?"
+    query = "when is Hayden Smith available?"
 
-    vectorstore = FAISS.load_local("huggingface_index_react", embeddings=embeddings, allow_dangerous_deserialization=True) 
+    vectorstore = FAISS.load_local("faiss_index_react", embeddings=embeddings, allow_dangerous_deserialization=True) 
 
     print("Loaded vector store")
 

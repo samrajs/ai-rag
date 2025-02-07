@@ -14,11 +14,11 @@ load_dotenv()
 
 if __name__ == '__main__':
     print("Ingesting...")
-    loader = TextLoader("./mediumblog1.txt")
+    loader = TextLoader("./resume.txt")
     document = loader.load()
 
     print("splitting...")
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
     texts = text_splitter.split_documents(document)
     print(f"created {len(texts)} chunks")
 

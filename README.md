@@ -57,7 +57,11 @@ $ code .
 
 We need to set the correct interpreter for executing python code. Press Ctrl+Shift+P and select "Python: Select Interpreter".
 
+![Interpreter](attachments/Interpreter.png)
+
 In the shown interpreters, select the one with the same name as the one from the set up section. In my case, I select the following, since it is the one created while executing "pipenv install".
+
+![Select Interpreter](attachments/SelectInterpreter.png)
 
 We are good to go.
 
@@ -65,11 +69,15 @@ We are good to go.
 
 During the embedding process, we split the file resume.txt, create embeddings with the help of the model "znbang/bge:small-en-v1.5-q8_0" and store it in the vector DB FAISS. 
 
+![Embedding](attachments/Embedding.png)
+
 Open the file "ingestion.py" and run it. It saves the embeddings in the folder "faiss_index_react".
 
 ### RAG
 
 In this step, question is sent to vector DB to do a similarity search to find the relevant chunks for the question. The question and its relevant chunks are then sent to LLM. The process looks like as below.
+
+![RAG](attachments/RAG.png)
 
 Open the file "rag.py" and execute it. The question "when is Hayden Smith available?" is hardcoded in the code. You get the following result
 

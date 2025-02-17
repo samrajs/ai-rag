@@ -8,6 +8,9 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain_community.vectorstores import FAISS
 from langchain_ollama import OllamaEmbeddings, ChatOllama
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+
 
 load_dotenv()
 
@@ -25,11 +28,20 @@ if __name__ == "__main__":
     print("Loaded vector store")
 
     retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
-    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
-    retrival_chain = create_retrieval_chain(
-        retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain
+    #combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
+    #retrival_chain = create_retrieval_chain(
+    #    retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain
+    #)
+
+    #result = retrival_chain.invoke(input={"input": query})
+
+    retrieval_chain = (
+        {"context": vectorstore.as_retriever(), "input": RunnablePassthrough()}
+        | retrieval_qa_chat_prompt
+        | llm
+        | StrOutputParser()
     )
 
-    result = retrival_chain.invoke(input={"input": query})
+    result = retrieval_chain.invoke(input=query)
 
-    print(result['answer'])
+    print(result)
